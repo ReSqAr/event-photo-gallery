@@ -1,0 +1,18 @@
+
+
+<h1 style="text-align:center;margin-bottom:20px;">
+
+  YY's Wedding Photo Gallery
+
+</h1>
+
+
+<div class="container-fluid">
+
+{{#each model.results as |result|}}
+
+  {{gallery-item item=result}}
+
+{{/each}}
+
+</div>
