@@ -9,10 +9,18 @@
 
 <div class="container-fluid">
 
-{{#each model.results as |result|}}
+{{#each results.results as |result|}}
 
   {{gallery-item item=result}}
 
 {{/each}}
 
 </div>
+
+<button class="btn btn-default {{unless hasPrevious "disabled"}}" {{action "previous"}}>
+  Previous
+</button>
+
+<button class="btn btn-default {{unless hasNext "disabled"}}" {{action "next"}}>
+  Next
+</button>
