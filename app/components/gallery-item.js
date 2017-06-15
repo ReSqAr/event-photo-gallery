@@ -7,6 +7,6 @@ export default Ember.Component.extend({
       return comment.slice(0,70).trim() + '…';
     } else {
       return comment;
-    };
+    }
   }),
 });
