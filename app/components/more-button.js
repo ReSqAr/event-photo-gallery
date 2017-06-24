@@ -3,9 +3,9 @@ import InViewportMixin from 'ember-in-viewport';
 
 export default Ember.Component.extend(InViewportMixin, {
   didEnterViewport : function() {
-    console.log('entered');
-      //call the onLoadMore property to invoke the passed in action
-      this.get('onLoadMore')();
+    //console.log('entered');
+    //call the onLoadMore property to invoke the passed in action
+    this.get('onLoadMore')();
   },
   actions: {
     loadMore() {
