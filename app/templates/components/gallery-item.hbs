@@ -1,6 +1,11 @@
 <div class="col-md-3 col-sm-6 col-xs-12" style="margin: 5px" style="height:240px;text-align: center;">
   <div class="row" style="margin-top:5px;">
-    <a data-fancybox="gallery" href="{{item.web_photo}}"><img style="height:192px; max-width:300px;" src="{{item.thumbnail}}"></a>
+    <a
+      data-fancybox="gallery"
+      href="{{item.web_photo}}"
+      data-caption="{{item.owner_comment}}">
+        <img style="height:192px; max-width:300px;" src="{{item.thumbnail}}" />
+    </a>
   </div>
 
   <div class="row">
