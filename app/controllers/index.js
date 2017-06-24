@@ -1,34 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  results: Ember.computed('model', function() {
+  response: Ember.computed('model', function() {
     return this.get('model');
   }),
 
-  hasNext: Ember.computed('results', function() {
-    return this.get('results.next');
+  photos: Ember.computed('response', function() {
+    return this.get('response.results');
   }),
 
-  hasPrevious: Ember.computed('results', function() {
-    return this.get('results.previous');
+  hasMore: Ember.computed('response', function() {
+    return this.get('response.next');
   }),
+
 
   actions: {
-    next: function() {
-      const nextURL = this.get('results.next');
+    more: function() {
+      const nextURL = this.get('response.next');
       if (nextURL) {
         let that = this;
-        Ember.$.getJSON(nextURL).then(function(ret) {
-          that.set("results",ret);
-        });
-      }
-    },
-    previous: function() {
-      const previousURL = this.get('results.previous');
-      if (previousURL) {
-        let that = this;
-        Ember.$.getJSON(previousURL).then(function(ret) {
-          that.set("results",ret);
+        Ember.$.getJSON(nextURL).then(function(response) {
+          that.set("photos", that.get("photos").concat(response.results) );
+          that.set("response",response);
         });
       }
     },
