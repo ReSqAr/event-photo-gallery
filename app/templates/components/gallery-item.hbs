@@ -3,13 +3,12 @@
     <a
       data-fancybox="gallery"
       href="{{item.web_photo}}"
-      data-caption="{{item.owner_comment}}">
+      data-caption="<div style='text-align:center;'><i>{{item.owner_name}}</i>{{if item.owner_comment ": " ""}}{{if item.owner_comment item.owner_comment ""}}</div>">
         <img style="height:192px; max-width:300px;" src="{{item.thumbnail}}" />
     </a>
   </div>
 
   <div class="row">
-  <i>{{item.owner_name}}</i>{{#if item.owner_comment}}, {{truncatedComment}}
-  {{/if}}
+  <i>{{item.owner_name}}</i>{{#if item.owner_comment}}: {{truncatedComment}}{{/if}}
   </div>
 </div>
