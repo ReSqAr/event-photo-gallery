@@ -7,10 +7,11 @@ export default Ember.Component.extend(InViewportMixin, {
     //call the onLoadMore property to invoke the passed in action
     this.get('onLoadMore')();
   },
+
   actions: {
     loadMore() {
       //call the onLoadMore property to invoke the passed in action
-      this.get('onLoadMore')();
+      this.attrs.onLoadMore();
     },
   },
 

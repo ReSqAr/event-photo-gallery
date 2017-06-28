@@ -1,6 +1,6 @@
 {
   "name": "wedding-gallery",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Small description for wedding-gallery goes here",
   "license": "MIT",
   "author": "",
@@ -15,7 +15,7 @@
     "test": "ember test"
   },
   "devDependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^1.0.0-beta.1",
@@ -28,6 +28,7 @@
     "ember-cli-htmlbars-inline-precompile": "^0.4.0",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^4.0.0",
+    "ember-cli-sass": "^6.2.0",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
@@ -38,11 +39,14 @@
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.13.0",
     "ember-truncate": "^0.2.2",
+    "ember-validations": "^2.0.0-alpha.5",
     "ember-welcome-page": "^3.0.0",
     "loader.js": "^4.2.3"
   },
   "engines": {
     "node": ">= 4"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+  }
 }

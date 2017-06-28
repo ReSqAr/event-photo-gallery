@@ -10,6 +10,9 @@ module.exports = function(defaults) {
     }
   });
 
+  app.import('vendor/js/md5.min.js');
+
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //

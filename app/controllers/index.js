@@ -1,29 +1,37 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
-export default Ember.Controller.extend({
-  response: Ember.computed('model', function() {
-    return this.get('model');
-  }),
+import Constants from 'wedding-gallery/constants';
 
-  photos: Ember.computed('response', function() {
-    return this.get('response.results');
-  }),
+export default Ember.Controller.extend(EmberValidations, {
+  username: '',
 
-  hasMore: Ember.computed('response', function() {
-    return this.get('response.next');
-  }),
-
+  validations: {
+    username: {
+      length: { minimum: 3, maximum: 32}
+    }
+  },
 
   actions: {
-    more: function() {
-      const nextURL = this.get('response.next');
-      if (nextURL) {
-        let that = this;
-        Ember.$.getJSON(nextURL).then(function(response) {
-          that.set("photos", that.get("photos").concat(response.results) );
-          that.set("response",response);
-        });
-      }
+    signUp: function() {
+      let that = this;
+      const username = this.get('username');
+
+      let create_user_data = { "name": username }
+      let create_user_url = Constants.SERVER_URL + 'api/create-user/';
+
+      Ember.$.ajax({
+        url: create_user_url,
+        method: "post",
+        contentType: 'application/json',
+        data: JSON.stringify(create_user_data)
+      }).then(function(response) {
+        let token = response.token;
+        if(token){
+          localStorage.setItem("api_token", token);
+          that.replaceRoute("event-overview");
+        }
+      });
     },
   },
 });

@@ -1,0 +1,18 @@
+<div class="row" style="margin:3px;">
+    <button class="btn btn-default center-block" {{action "showChallenge" item}}>
+      <div style="width:300px;margin:1px;height:42px;line-height:42px;vertical-align:middle;">
+        <img src="{{item.icon}}" height="42" width="42"> {{item.name}}
+      </div>
+    </button>
+
+  {{#if editMode}}
+    <div style="margin:5px;text-align:center;margin-bottom:20px;margin-left:auto;margin-right:auto;width:500px;">
+      {{#bs-form formLayout="horizontal" model=this onSubmit=(action "access") as |form|}}
+        {{form.element controlType="name" label="Event password" placeholder="Event password" property="challenge" width="100px"}}
+        {{bs-button defaultText="Access" type="primary" buttonType="submit"}}
+        {{bs-button defaultText="Cancel" onClick=(action 'cancel') }}
+      {{/bs-form}}
+    </div>
+    {{/if}}
+
+</div>

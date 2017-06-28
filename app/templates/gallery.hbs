@@ -1,0 +1,21 @@
+<h1 style="text-align:center;margin-bottom:20px;">
+  YY's Wedding Gallery
+</h1>
+
+
+<div style="text-align:center;margin-bottom:20px;">
+  Here are your snapshots, enjoy!
+</div>
+
+
+
+<div class="container-fluid">
+  {{#each photos as |photo|}}
+    {{gallery-item item=photo}}
+  {{/each}}
+</div>
+
+
+{{#if hasMore}}
+  {{more-button onLoadMore=(action 'more')}}
+{{/if}}

@@ -1,0 +1,15 @@
+<h1 style="text-align:center;margin-bottom:20px;">
+  Photo Gallery
+</h1>
+
+
+<div style="text-align:center;margin-bottom:20px;">
+  Here are all events.
+</div>
+
+
+<div class="container-fluid">
+  {{#each model as |event|}}
+    {{event-item item=event transitionToGallery=(action "transitionToGallery" event.id) }}
+  {{/each}}
+</div>

@@ -1,31 +1,12 @@
-
-
 <h1 style="text-align:center;margin-bottom:20px;">
-
-  YY's Wedding Gallery
-
+  Photo Gallery: Sign Up
 </h1>
 
 
-<div style="text-align:center;margin-bottom:20px;">
-
-  Here are your snapshots, enjoy!
-
-</div>
-
-
-
-<div class="container-fluid">
-
-  {{#each photos as |photo|}}
-
-    {{gallery-item item=photo}}
-
-  {{/each}}
+<div style="text-align:center;margin-bottom:20px;margin-left:auto;margin-right:auto;width:500px;">
+  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "signUp") as |form|}}
+    {{form.element controlType="name" label="Username" placeholder="Your user name, e.g. Yasin" property="username" width="100px"}}
+    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+  {{/bs-form}}
 
 </div>
-
-
-{{#if hasMore}}
-  {{more-button onLoadMore=(action 'more')}}
-{{/if}}
