@@ -4,16 +4,18 @@ import Constants from 'wedding-gallery/constants';
 export default Ember.Route.extend({
   model: function(params) {
       let token = localStorage.getItem('api_token');
-      let event_list_url = Constants.SERVER_URL + 'api/photos/';
-      event_list_url += '?';
-      event_list_url += 'event_id=' + params.event_id;
-      event_list_url += '&';
-      event_list_url += 'page_size=20';
+      let photo_list_url = Constants.SERVER_URL + 'api/photos/';
+      photo_list_url += '?';
+      photo_list_url += 'event_id=' + params.event_id;
+      photo_list_url += '&';
+      photo_list_url += 'page_size=20';
+      photo_list_url += '&';
+      photo_list_url += 'only_visible=true';
 
       this.set('event_id',params.event_id)
 
       return Ember.$.ajax({
-        url: event_list_url,
+        url: photo_list_url,
         method: "get",
         contentType: 'application/json',
         beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token);},
@@ -39,7 +41,6 @@ export default Ember.Route.extend({
             return;
           }
         }
-        console.log("event not found");
       });
 
   },

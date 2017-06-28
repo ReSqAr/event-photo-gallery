@@ -10,19 +10,25 @@ export default Ember.Component.extend({
   challenge: '',
 
   actions: {
-    showChallenge(event) {
-      this.set('editMode', true);
+    tryAccess() {
+      if( this.item.has_access ){
+        // we have already access to this event
+        this.attrs.transitionToGallery();
+      } else {
+        // we have to ask for access
+        this.set('editMode', true);
+      }
     },
 
-    cancel(){
+    challengeAccessCancel(){
       this.set('editMode', false);
     },
 
-    access() {
+    challengeAccess() {
       const token = localStorage.getItem('api_token');
       const challenge = this.challenge;
 
-      let hashed_challenge = md5(token + "$" + challenge);
+      let hashed_challenge = md5(token + "$" + challenge.trim().toLowerCase());
 
       let auth_user_data = { hashed_challenge: hashed_challenge }
       let auth_user_url = Constants.SERVER_URL + 'api/authenticate_user_for_event/' + this.item.id;
@@ -34,8 +40,10 @@ export default Ember.Component.extend({
         contentType: 'application/json',
         data: JSON.stringify(auth_user_data),
         beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token); },
-      }).then(function(response) {
+      }).then(function() {
         that.attrs.transitionToGallery();
+      }).catch(function() {
+        alert("Event password is incorrect.");
       });
     },
   },

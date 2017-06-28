@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Constants from 'wedding-gallery/constants';
 
 export default Ember.Controller.extend({
   response: Ember.computed('model', function() {
