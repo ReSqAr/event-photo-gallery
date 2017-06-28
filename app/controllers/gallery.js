@@ -1,11 +1,13 @@
 import Ember from 'ember';
+import Constants from 'wedding-gallery/constants';
 
 export default Ember.Controller.extend({
   response: Ember.computed('model', function() {
     return this.get('model');
   }),
 
-  title: 'Photo List',
+  title: 'Photo list',
+  icon: '',
 
   photos: Ember.computed('response', function() {
     return this.get('response.results');
