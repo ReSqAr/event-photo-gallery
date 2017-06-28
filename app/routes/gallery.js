@@ -19,6 +19,6 @@ export default Ember.Route.extend({
   },
 
   activate: function() {
-      document.title = "YY's Wedding Gallery";
+      document.title = 'Photo Gallery'
   },
 });

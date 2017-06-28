@@ -2,6 +2,10 @@ import Ember from 'ember';
 
 
 export default Ember.Route.extend({
+  activate: function() {
+      document.title = "Photo Gallery: Sign Up";
+  },
+
   beforeModel() {
     let token = localStorage.getItem("api_token");
     if( typeof token === 'string' && token.length > 3 ) {

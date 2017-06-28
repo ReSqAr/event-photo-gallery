@@ -5,6 +5,8 @@ export default Ember.Controller.extend({
     return this.get('model');
   }),
 
+  title: 'Photo List',
+
   photos: Ember.computed('response', function() {
     return this.get('response.results');
   }),
