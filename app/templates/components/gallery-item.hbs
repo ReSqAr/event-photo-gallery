@@ -1,15 +1,30 @@
-<div class="col-md-3 col-sm-6 col-xs-12" style="height:240px;text-align: center;">
+<div class="col-md-3 col-sm-6 col-xs-12" style="height:240px;padding-top:5px;text-align:center;">
 
-  <div class="row" style="margin-top:5px;">
+  <div>
     <a
       data-fancybox="gallery"
       href="{{item.web_photo}}"
       data-caption="<div style='text-align:center;'><i>{{item.owner_name}}</i>{{if item.comment ": " ""}}{{if item.comment item.comment ""}} <a href='{{item.photo}}'>Download image</a></div>">
-        <img style="height:192px; max-width:300px;" src="{{item.thumbnail}}" />
+        <span
+          {{action "liked"}}
+          style="position:absolute;padding-left:0.4em;padding-top:0.5em;"
+          >
+          <span
+            class="glyphicon glyphicon-heart"
+            style="color:white;font-size:30px;"
+          ></span>
+          {{# if item.likes}}
+            <span style="position:absolute;left:18.5px;top:12px;">
+              {{item.likes}}
+            </span>
+          {{/if}}
+        </span>
+        <img style="height:192px; max-width:300px;" src="{{item.thumbnail}}">
     </a>
   </div>
 
   <div class="row">
+
     <i>{{item.owner_name}}</i>{{#if item.comment}}: {{truncatedComment}}{{/if}}
   </div>
 

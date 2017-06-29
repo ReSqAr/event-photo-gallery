@@ -9,4 +9,11 @@ export default Ember.Component.extend({
             return comment;
         }
     }),
+
+    actions: {
+        liked() {
+            this.set('item.likes', this.get('item.likes') + 1);
+        },
+    },
+
 });

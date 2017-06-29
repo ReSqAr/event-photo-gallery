@@ -3,20 +3,20 @@
     <img src="{{icon}}" height="50" width="50">
   {{/if}}
   {{title}}
-  <button class="btn btn-default" style="width:200px;float:right;" {{action "upload"}}>
+
+  <button class="btn btn-default" style="width:200px;float:right;margin-right:30px;" {{action "upload"}}>
     Upload
   </button>
 </h1>
 
 
-
-<div style="text-align:center;margin-bottom:20px;">
+<div style="text-align:center;margin-bottom:20px;clear:both;">
   Here are your snapshots, enjoy!
-</div>
 
-{{#bs-dropdown as |dd|}}
-    {{#dd.button}}Sort order <span class="caret"></span>{{/dd.button}}
-    {{#dd.menu as |ddm|}}
+  <div style="float:right;margin-right:30px;">
+    {{#bs-dropdown as |dd|}}
+      {{#dd.button}}Sort order <span class="caret"></span>{{/dd.button}}
+      {{#dd.menu class="dropdown-menu-right" as |ddm|}}
         {{#ddm.item class=(if is_sort_order_upload "active" "")}}
             {{#link-to "gallery" event_id (query-params sort_order="uploaded")}} Sort by upload date {{/link-to}}
         {{/ddm.item}}
@@ -26,10 +26,13 @@
         {{#ddm.item class=(if is_sort_order_likes "active" "")}}
             {{#link-to "gallery" event_id (query-params sort_order="likes")}} Sort by likes {{/link-to}}
         {{/ddm.item}}
-    {{/dd.menu}}
-{{/bs-dropdown}}
+      {{/dd.menu}}
+    {{/bs-dropdown}}
+  </div>
+</div>
 
-<div class="container-fluid">
+
+<div class="container-fluid" style="clear:both;">
   {{#each photos as |photo|}}
     {{gallery-item item=photo}}
   {{/each}}
