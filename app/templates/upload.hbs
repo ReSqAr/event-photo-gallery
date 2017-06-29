@@ -7,11 +7,21 @@
 
 
 
+<div style="margin:5px;text-align:center;margin-bottom:20px;margin-left:auto;margin-right:auto;width:500px;">
+  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "upload") as |form|}}
+    {{form.element id="file" controlType="file" label="Image" property="file" multiple=true width="100px"}}
+    {{form.element controlType="text" label="Comment" placeholder="Your funny comment goes here!" property="comment" width="100px"}}
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-8" style="text-align:left">
+        {{bs-button defaultText="Upload" type="primary" buttonType="submit"}}
+        {{bs-button defaultText="Back to Gallery" onClick=(action 'backToGallery') }}
+      </div>
+    </div>
+  {{/bs-form}}
+</div>
 
 
 
 
 
-<button class="btn btn-default" style="width:200px;" {{action "backToGallery"}}>
-  Back to Gallery
-</button>
