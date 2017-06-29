@@ -6,10 +6,10 @@ export default Ember.Route.extend({
       document.title = "Photo Gallery: Sign Up";
   },
 
-  beforeModel() {
-    let token = localStorage.getItem("api_token");
-    if( typeof token === 'string' && token.length > 3 ) {
-      this.replaceWith('event-overview'); // Implicitly aborts the on-going transition.
+  beforeModel: function() {
+      let token = localStorage.getItem("api_token");
+      if( typeof token === 'string' && token.length > 3 ) {
+          this.replaceWith('event-overview'); // Implicitly aborts the on-going transition.
+      }
     }
-  }
 });

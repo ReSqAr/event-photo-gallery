@@ -19,6 +19,7 @@
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^1.0.0-beta.1",
+    "ember-bootstrap-validations": "^1.0.0-alpha",
     "ember-cli": "2.13.2",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.0.0",
@@ -47,6 +48,5 @@
     "node": ">= 4"
   },
   "private": true,
-  "dependencies": {
-  }
+  "dependencies": {}
 }

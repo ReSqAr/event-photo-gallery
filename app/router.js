@@ -7,8 +7,9 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('gallery', { path: '/gallery/:event_id' });
   this.route('event-overview');
+  this.route('event-auth', { path: '/event-auth/:event_id' });
+  this.route('gallery', { path: '/gallery/:event_id' });
 });
 
 export default Router;

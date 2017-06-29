@@ -1,0 +1,15 @@
+<h1 style="text-align:center;margin-bottom:20px;">
+  {{#if icon}}
+    <img src="{{icon}}" height="50" width="50">
+  {{/if}}
+  {{title}} - Authentication
+</h1>
+
+
+<div style="margin:5px;text-align:center;margin-bottom:20px;margin-left:auto;margin-right:auto;width:500px;">
+  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "access") as |form|}}
+    {{form.element controlType="name" label="Event password" placeholder="Event password" property="challenge" width="100px"}}
+    {{bs-button defaultText="Access" type="primary" buttonType="submit"}}
+    {{bs-button defaultText="Cancel" onClick=(action 'cancel') }}
+  {{/bs-form}}
+</div>

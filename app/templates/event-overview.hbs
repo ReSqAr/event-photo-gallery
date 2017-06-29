@@ -10,6 +10,6 @@
 
 <div class="container-fluid">
   {{#each model as |event|}}
-    {{event-item item=event transitionToGallery=(action "transitionToGallery" event.id) }}
+    {{event-item item=event access=(action "access" event) }}
   {{/each}}
 </div>

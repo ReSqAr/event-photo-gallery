@@ -7,6 +7,14 @@ export default Ember.Route.extend({
       document.title = "Photo Gallery: Event List";
   },
 
+  beforeModel: function() {
+      let token = localStorage.getItem("api_token");
+      if( !( typeof token === 'string' && token.length > 3 ) ) {
+          // we are in trouble!
+          this.transitionTo('/');
+      }
+  },
+
   model: function() {
       let token = localStorage.getItem('api_token');
       let event_list_url = Constants.SERVER_URL + 'api/events-metadata/';
