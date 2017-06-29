@@ -33,7 +33,6 @@ export default Ember.Route.extend({
         photo_list_url += 'only_visible=true'
         photo_list_url += '&';
         photo_list_url += 'sort_order=' + params.sort_order;
-        ;
 
         const event_metadata_url = Constants.SERVER_URL + 'api/single-event-metadata/' + params.event_id;
 

@@ -47,7 +47,7 @@ export default Ember.Controller.extend(EmberValidations, {
               upload_form.append("visible", true);
               upload_form.append("photo", form_file);
 
-              let that = this;
+              //let that = this;
               Ember.$.ajax({
                 url: upload_url,
                 method: "post",
