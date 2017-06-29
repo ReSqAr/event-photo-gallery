@@ -15,7 +15,9 @@ export default Ember.Route.extend({
     },
 
     model: function(params) {
-        let token = localStorage.getItem('api_token');
+        this.set('event_id',params.event_id)
+
+        const token = localStorage.getItem('api_token');
         let photo_list_url = Constants.SERVER_URL + 'api/photos/';
         photo_list_url += '?';
         photo_list_url += 'event_id=' + params.event_id;
@@ -24,34 +26,31 @@ export default Ember.Route.extend({
         photo_list_url += '&';
         photo_list_url += 'only_visible=true';
 
-        this.set('event_id',params.event_id)
+        const event_metadata_url = Constants.SERVER_URL + 'api/single-event-metadata/' + params.event_id;
 
-        return Ember.$.ajax({
-          url: photo_list_url,
-          method: "get",
-          contentType: 'application/json',
-          beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token);},
+        return Ember.RSVP.hash({
+            'photos': Ember.$.ajax({
+                  url: photo_list_url,
+                  method: "get",
+                  contentType: 'application/json',
+                  beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token);},
+                }),
+            'event':  Ember.$.ajax({
+                  url: event_metadata_url,
+                  method: "get",
+                  contentType: 'application/json',
+                  beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token); },
+                })
         });
     },
 
-    afterModel: function() {
-        const token = localStorage.getItem('api_token');
-        const event_metadata_url = Constants.SERVER_URL + 'api/single-event-metadata/' + this.event_id;
-        let that = this;
+    afterModel: function(model) {
+        const event = model.event;
+        if( !event || event.id != this.event_id || !event.has_access ){
+            // we are in trouble!
+            this.transitionTo('event-auth', this.event_id);
+        }
 
-        Ember.$.ajax({
-          url: event_metadata_url,
-          method: "get",
-          contentType: 'application/json',
-          beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token); },
-        }).then(function(response){
-            if( response.id != that.event_id || !response.has_access ){
-              // we are in trouble!
-              that.transitionTo('event-auth',that.event_id);
-            }
-            that.controller.set('title', response.name);
-            document.title = response.name;
-            that.controller.set('icon', response.icon);
-        });
+        document.title = event.name;
     },
 });

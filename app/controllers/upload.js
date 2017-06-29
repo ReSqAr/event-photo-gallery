@@ -1,5 +1,3 @@
-/* globals md5 */
-
 import Ember from 'ember';
 
 import Constants from 'wedding-gallery/constants';
@@ -18,25 +16,20 @@ export default Ember.Controller.extend({
         return this.get('model.id');
     }),
 
-    challenge: '',
-
 
     actions: {
-        access: function() {
+        upload: function() {
             const token = localStorage.getItem('api_token');
-            const challenge = this.challenge;
 
-            const hashed_challenge = md5(token + "$" + challenge.trim().toLowerCase());
-
-            const auth_user_data = { hashed_challenge: hashed_challenge }
-            const auth_user_url = Constants.SERVER_URL + 'api/authenticate_user_for_event/' + this.get('event_id');
+            const upload_data = {  }
+            const upload_url = Constants.SERVER_URL + 'api/photo/';
 
             let that = this;
             Ember.$.ajax({
-              url: auth_user_url,
+              url: upload_url,
               method: "post",
               contentType: 'application/json',
-              data: JSON.stringify(auth_user_data),
+              data: JSON.stringify(upload_data),
               beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token); },
             }).then(function() {
                 that.replaceRoute('gallery', that.get('event_id'));
@@ -45,8 +38,8 @@ export default Ember.Controller.extend({
             });
         },
 
-        cancel: function() {
-            this.transitionToRoute('event-overview');
+        backToGallery: function() {
+            this.replaceRoute('gallery', this.get('event_id'));
         }
     },
 });

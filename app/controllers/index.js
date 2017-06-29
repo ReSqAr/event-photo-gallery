@@ -12,6 +12,7 @@ export default Ember.Controller.extend(EmberValidations, {
         }
     },
 
+
     actions: {
         signUp: function() {
             let that = this;
