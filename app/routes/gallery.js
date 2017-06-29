@@ -6,6 +6,12 @@ export default Ember.Route.extend({
         document.title = 'Photo Gallery'
     },
 
+    queryParams: {
+        sort_order: {
+            refreshModel: true // refresh when sort order changes
+        }
+    },
+
     beforeModel: function() {
       let token = localStorage.getItem("api_token");
       if( !( typeof token === 'string' && token.length > 3 ) ) {
@@ -15,7 +21,7 @@ export default Ember.Route.extend({
     },
 
     model: function(params) {
-        this.set('event_id',params.event_id)
+        this.set('event_id', params.event_id)
 
         const token = localStorage.getItem('api_token');
         let photo_list_url = Constants.SERVER_URL + 'api/photos/';
@@ -24,7 +30,10 @@ export default Ember.Route.extend({
         photo_list_url += '&';
         photo_list_url += 'page_size=20';
         photo_list_url += '&';
-        photo_list_url += 'only_visible=true';
+        photo_list_url += 'only_visible=true'
+        photo_list_url += '&';
+        photo_list_url += 'sort_order=' + params.sort_order;
+        ;
 
         const event_metadata_url = Constants.SERVER_URL + 'api/single-event-metadata/' + params.event_id;
 
@@ -53,4 +62,11 @@ export default Ember.Route.extend({
 
         document.title = event.name;
     },
+
+    setupController: function(controller, model) {
+        this._super(controller, model);
+        controller.set('additionalResponse', null);
+        controller.set('accumulatedAdditionalPhotos', []);
+    },
+
 });

@@ -1,13 +1,35 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    lastResponse: Ember.computed('model.photos', function() {
-        return this.get('model.photos');
+    queryParams: ['sort_order'],
+    sort_order: 'uploaded',
+
+    is_sort_order_upload: Ember.computed('sort_order', function() {
+        return this.get('sort_order') != "created" && this.get('sort_order') != "likes";
+    }),
+    is_sort_order_created: Ember.computed('sort_order', function() {
+        return this.get('sort_order') == "created";
+    }),
+    is_sort_order_likes: Ember.computed('sort_order', function() {
+        return this.get('sort_order') == "likes";
     }),
 
-    photos: Ember.computed('model.photos', function() {
-        return this.get('model.photos.results');
+
+    lastResponse: Ember.computed('model.photos', 'additionalResponse', function() {
+        if( this.get('additionalResponse') ){
+            return this.get('additionalResponse');
+        } else {
+            return this.get('model.photos');
+        }
     }),
+
+    additionalResponse: null,
+
+    photos: Ember.computed('model.photos', 'accumulatedAdditionalPhotos', function() {
+        return this.get('model.photos.results').concat(this.get("accumulatedAdditionalPhotos"));
+    }),
+
+    accumulatedAdditionalPhotos: [],
 
     hasMore: Ember.computed('lastResponse', function() {
         return this.get('lastResponse.next');
@@ -19,6 +41,10 @@ export default Ember.Controller.extend({
 
     icon: Ember.computed('model.event', function() {
         return this.get('model.event.icon');
+    }),
+
+    event_id: Ember.computed('model.event', function() {
+        return this.get('model.event.id');
     }),
 
 
@@ -36,14 +62,14 @@ export default Ember.Controller.extend({
                   contentType: 'application/json',
                   beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token); },
                 }).then(function(response) {
-                    that.set("photos", that.get("photos").concat(response.results) );
-                    that.set("lastResponse", response);
+                    that.set("accumulatedAdditionalPhotos", that.get("accumulatedAdditionalPhotos").concat(response.results) );
+                    that.set("additionalResponse", response);
                 });
             }
         },
 
         upload: function(){
-            this.transitionToRoute('upload', this.get("model.event.id"));
+            this.transitionToRoute('upload', this.get("event_id"));
         },
     },
 });

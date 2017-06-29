@@ -1,9 +1,10 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
 import Constants from 'wedding-gallery/constants';
 
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(EmberValidations, {
     title: Ember.computed('model', function() {
         return this.get('model.name');
     }),
@@ -33,13 +34,16 @@ export default Ember.Controller.extend({
                 return;
             }
 
+            this.set('file','');
+            this.set('comment','');
+
             for( let i = 0; i < form_files.length; i++ ) {
               const form_file = form_files[i];
               const upload_url = Constants.SERVER_URL + 'api/photos/';
               let upload_form = new FormData();
               upload_form.append("event", event_id);
               upload_form.append("comment", comment);
-              upload_form.append("hash_md5", "!IGNORE");
+              upload_form.append("hash_md5", "!IGNORE!");
               upload_form.append("visible", true);
               upload_form.append("photo", form_file);
 
@@ -53,8 +57,7 @@ export default Ember.Controller.extend({
                 data: upload_form,
                 beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token); },
               }).then(function() {
-                  that.set('file','');
-                  that.set('comment','');
+                /* success message? */
               }).catch(function() {
                   alert("Upload failed for " + form_file.name + ".");
               });
