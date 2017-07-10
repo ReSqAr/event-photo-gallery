@@ -24,6 +24,15 @@ export default Ember.Route.extend({
         method: "get",
         contentType: 'application/json',
         beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', 'Token ' + token); },
+      }).catch(function(error) {
+          if(error.status == 403){
+              alert("Authenification problem, resetting user.");
+              localStorage.setItem("api_token", '');
+              this.transitionTo('/');
+              return;
+          }
+          // other errors are handled elsewhere
+          throw error;
       });
   },
 
