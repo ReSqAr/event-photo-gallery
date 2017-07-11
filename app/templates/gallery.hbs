@@ -33,11 +33,14 @@
   </div>
 </div>
 
+<div style="clear:both;"></div>
 
-<div class="container-fluid" style="clear:both;">
-  {{#each photos as |photo|}}
-    {{gallery-item item=photo}}
-  {{/each}}
+<div class="container-fluid">
+  <div class="row" style="display:flex;flex-wrap:wrap;">
+    {{#each photos as |photo|}}
+      {{gallery-item item=photo}}
+    {{/each}}
+  </div>
 </div>
 
 

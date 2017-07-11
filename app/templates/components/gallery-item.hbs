@@ -1,31 +1,30 @@
-<div class="col-md-3 col-sm-6 col-xs-12" style="height:240px;padding:5px;text-align:center;">
-
-  <div>
-    <a
-      data-fancybox="gallery"
-      href="{{item.web_photo}}"
-      data-caption="<div style='text-align:center;'><i>{{item.owner_name}}</i>{{if item.comment ": " ""}}{{if item.comment item.comment ""}} <a href='{{item.photo}}'>Download image</a></div>">
-        <span
+<div style="width:100%;height:100%;display:table;">
+  <a
+    data-fancybox="gallery"
+    href="{{item.web_photo}}"
+    style="padding:20px 10px;display:table-cell;vertical-align: bottom;"
+    data-caption="<div style='text-align:center;'><i>{{item.owner_name}}</i>{{if item.comment ": " ""}}{{if item.comment item.comment ""}} <a href='{{item.photo}}'>Download image</a></div>">
+      <div style="position:relative !important;">
+        <img class="img-responsive" style="margin-left:auto;margin-right:auto;" src="{{item.thumbnail}}">
+        <div style="left:0;bottom:0;padding:8px;position:absolute;box-sizing:border-box;overflow:hidden;text-align:center;background-color:rgba(220, 220, 220, 0.8);width:100%;color:black;">
+          <i>{{item.owner_name}}</i>{{#if item.comment}}: {{truncatedComment}}{{/if}}
+        </div>
+        <div
           {{action "liked"}}
-          style="position:absolute;padding-left:0.4em;padding-top:0.5em;"
+          style="position:absolute;left:0.0em;top:0.0em;"
           >
-          <span
-            class="glyphicon glyphicon-heart"
-            style="color:#ffe6e6;font-size:30px;"
-          ></span>
-          {{# if item.likes}}
-            <span style="position:absolute;left:18.5px;top:12px;">
-              {{item.likes}}
-            </span>
-          {{/if}}
-        </span>
-        <img style="height:192px; max-width:256px;" src="{{item.thumbnail}}">
-    </a>
-  </div>
-
-  <div class="row">
-
-    <i>{{item.owner_name}}</i>{{#if item.comment}}: {{truncatedComment}}{{/if}}
-  </div>
-
+          <div style="position:relative !important;">
+            <span
+              class="glyphicon glyphicon-heart"
+              style="color:#ffe6e6;font-size:30px;"
+            ></span>
+            {{# if item.likes}}
+              <div style="position:absolute;left:0;top:0.4em;width:100%;height:100%;text-align:center;padding-left:0.2em;color:black;">
+                {{item.likes}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+  </a>
 </div>
