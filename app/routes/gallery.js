@@ -12,12 +12,19 @@ export default Ember.Route.extend({
         }
     },
 
-    beforeModel: function() {
-      let token = localStorage.getItem("api_token");
-      if( !( typeof token === 'string' && token.length > 3 ) ) {
-        // we are in trouble!
-        this.transitionTo('/');
-      }
+    beforeModel: function(transition) {
+        if( "api_token" in transition.queryParams ){
+            const token = transition.queryParams.api_token;
+            if( token.length > 3 )
+                localStorage.setItem("api_token", token);
+        }
+
+
+        let token = localStorage.getItem("api_token");
+        if( !( typeof token === 'string' && token.length > 3 ) ) {
+              // we are in trouble!
+              this.transitionTo('/');
+        }
     },
 
     model: function(params) {
